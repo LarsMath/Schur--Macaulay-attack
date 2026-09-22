@@ -10,7 +10,7 @@ from mathematics.algorithms import decreasing_sequences
 intersection = False
 
 # Choose a parameter set
-parameters = [(64,4, 61,1024)]#mayo_parameters()
+parameters = mayo_parameters()
 
 # Maximum amount of gradings for the exterior algebra
 MAX_PARTITION = 12

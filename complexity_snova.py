@@ -20,12 +20,12 @@ def average_density(v, o, m, divided_powers):
         densities_wedges = [math.comb(v + 2**i, 2**i) for i in range(1, o[0].bit_length())]
         rows_wedges = [sum(m * dim_ext(v + o[j1], o[j1] - 2**i) * math.prod(dim_ext(v, o[j]) for j in range(len(a)) if j != j1) for j1 in range(len(o))) for i in range(1, o[0].bit_length())]
         densities_bilinears = [math.comb(v + 2**i, 2**i)**2 for i in range(o[0].bit_length())]
-        rows_bilinears = [sum(2 * m * dim_ext(v + o[j1], o[j1] - 2**i) * dim_ext(v + o[j2], o[j2] - 2**i) * math.prod(dim_ext(v, o[j]) for j in range(len(a)) if j not in [j1, j2]) for j1 in range(len(o)) for j2 in range(j1+1, len(o))) for i in range(o[0].bit_length())]
+        rows_bilinears = [sum(2 * m * dim_ext(v + o[j1], o[j1] - 2**i) * dim_ext(v + o[j2], o[j2] - 2**i) * math.prod(dim_ext(v, o[j]) for j in range(len(o)) if j not in [j1, j2]) for j1 in range(len(o)) for j2 in range(j1+1, len(o))) for i in range(o[0].bit_length())]
     else:
         densities_wedges = [math.comb(v + 2, 2)]
         rows_wedges = [sum(m * dim_ext(v + o[j1], o[j1] - 2) * math.prod(dim_ext(v, o[j]) for j in range(len(a)) if j != j1) for j1 in range(len(o)))]
         densities_bilinears = [math.comb(v + 1, 1)**2]
-        rows_bilinears = [sum(2 * m * dim_ext(v + o[j1], o[j1] - 1) * dim_ext(v + o[j2], o[j2] - 1) * math.prod(dim_ext(v, o[j]) for j in range(len(a)) if j not in [j1, j2]) for j1 in range(len(o)) for j2 in range(j1+1, len(o)))]
+        rows_bilinears = [sum(2 * m * dim_ext(v + o[j1], o[j1] - 1) * dim_ext(v + o[j2], o[j2] - 1) * math.prod(dim_ext(v, o[j]) for j in range(len(o)) if j not in [j1, j2]) for j1 in range(len(o)) for j2 in range(j1+1, len(o)))]
 
     total_density = sum(d * r for d, r in zip(densities_wedges, rows_wedges)) + sum(d * r for d, r in zip(densities_bilinears, rows_bilinears))
     total_rows = sum(rows_wedges) + sum(rows_bilinears)
